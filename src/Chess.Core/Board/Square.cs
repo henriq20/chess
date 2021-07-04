@@ -1,4 +1,5 @@
 using Chess.Core.Pieces;
+using Chess.Core.Exceptions;
 
 namespace Chess.Core.Board
 {
@@ -49,6 +50,45 @@ namespace Chess.Core.Board
             : this(row, column)
         {
             Piece = piece;
+        }
+
+        /// <summary>
+        /// Places a piece on the square.
+        /// </summary>
+        /// <param name="piece">The piece to place on the square.</param>
+        /// <exception cref="SquareAlreadyOccupiedException"/>
+        public void Place(ChessPiece piece)
+        {
+            var positionOfThisSquare = new ChessPosition((char)(Column + 'a'), Row + 1);
+
+            if (!IsFree)
+            {
+                throw new SquareAlreadyOccupiedException
+                    ("The square is already occupied. Take out the piece before placing another one.");
+            }
+            if (!positionOfThisSquare.Equals(piece.Position))
+            {
+                piece.UpdatePosition(positionOfThisSquare);
+            }
+            
+            Piece = piece;
+        }
+
+        /// <summary>
+        /// Takes the <see cref="Piece"/> out from the square.
+        /// </summary>
+        /// <returns>The taken piece if it exists; otherwise, <see langword="null"/>.</returns>
+        public ChessPiece TakeOut()
+        {
+            if (!IsFree)
+            {
+                var piece = Piece;
+                Piece = null;
+
+                return piece;
+            }
+
+            return null;
         }
     }
 }
