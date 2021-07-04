@@ -24,10 +24,10 @@ namespace Chess.Core.Pieces
         }
         
         /// <summary>
-        /// Updates the <see cref="Position"/> and increases the number of <see cref="Moves"/>.
+        /// Changes the <see cref="Position"/> and increases the number of <see cref="Moves"/>.
         /// </summary>
         /// <param name="newPosition">The new position of the piece.</param>
-        public virtual void UpdatePosition(ChessPosition newPosition)
+        public virtual void ChangePosition(ChessPosition newPosition)
         {
             Moves++;
             Position = newPosition;

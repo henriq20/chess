@@ -68,7 +68,7 @@ namespace Chess.Core.Board
             }
             if (!positionOfThisSquare.Equals(piece.Position))
             {
-                piece.UpdatePosition(positionOfThisSquare);
+                piece.ChangePosition(positionOfThisSquare);
             }
             
             Piece = piece;
