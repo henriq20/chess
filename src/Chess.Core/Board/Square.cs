@@ -9,14 +9,9 @@ namespace Chess.Core.Board
     public class Square
     {
         /// <summary>
-        /// Gets the row where the square is.
+        /// Gets an identifier of the square that is represented by a letter followed by a number. 
         /// </summary>
-        public int Row { get; init; }
-
-        /// <summary>
-        /// Gets the column where the square is.
-        /// </summary>
-        public int Column { get; init; }
+        public ChessPosition Name { get; init; }
 
         /// <summary>
         /// Gets or Sets the square's piece.
@@ -32,22 +27,19 @@ namespace Chess.Core.Board
         /// <summary>
         /// Initializes a new instance of the <see cref="Square"/>class.
         /// </summary>
-        /// <param name="row">The row where the square is on the chessboard.</param>
-        /// <param name="column">The column where the square is on the chessboard.</param>
-        public Square(int row, int column)
+        /// <param name="name">The square's identifier.</param>
+        public Square(ChessPosition name)
         {
-            Row = row;
-            Column = column;
+            Name = name;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Square"/>class.
         /// </summary>
-        /// <param name="row">The row where the square is on the chessboard.</param>
-        /// <param name="column">The column where the square is on the chessboard.</param>
+        /// <param name="name">The square's identifier.</param>
         /// <param name="piece">The square's piece.</param>
-        public Square(int row, int column, ChessPiece piece)
-            : this(row, column)
+        public Square(ChessPosition name, ChessPiece piece)
+            : this(name)
         {
             Piece = piece;
         }
@@ -59,16 +51,14 @@ namespace Chess.Core.Board
         /// <exception cref="SquareAlreadyOccupiedException"/>
         public void Place(ChessPiece piece)
         {
-            var positionOfThisSquare = new ChessPosition((char)(Column + 'a'), Row + 1);
-
             if (!IsFree)
             {
                 throw new SquareAlreadyOccupiedException
                     ("The square is already occupied. Take out the piece before placing another one.");
             }
-            if (!positionOfThisSquare.Equals(piece.Position))
+            if (!Name.Equals(piece.Position))
             {
-                piece.ChangePosition(positionOfThisSquare);
+                piece.ChangePosition(Name);
             }
             
             Piece = piece;
