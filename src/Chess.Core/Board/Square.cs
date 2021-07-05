@@ -47,6 +47,9 @@ namespace Chess.Core.Board
 
         /// <summary>
         /// Places a piece on the square.
+        /// <para>
+        /// The position of the piece will be changed if its position does not equal to the square.
+        /// </para>
         /// </summary>
         /// <param name="piece">The piece to place on the square.</param>
         /// <exception cref="SquareAlreadyOccupiedException"/>
@@ -62,6 +65,7 @@ namespace Chess.Core.Board
             if (!Name.Equals(piece.Position))
             {
                 piece.ChangePosition(Name);
+                piece.DecreaseMoves();
             }
             
             Piece = piece;
