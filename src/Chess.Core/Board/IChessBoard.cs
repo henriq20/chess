@@ -3,10 +3,18 @@ namespace Chess.Core.Board
     public interface IChessBoard
     {
         /// <summary>
-        /// Gets a multidimensional array with all the squares on the chessboard.
+        /// Gets a square of the board by specifing its name.
+        /// <para>
+        /// E.g: "a2", "h7".
+        /// </para>
         /// </summary>
-        Square[,] Squares { get; }
-        
+        Square this[string name] { get; }
+
+        /// <summary>
+        /// Gets a square of the board by specifing its row and column.
+        /// </summary>
+        Square this[int row, int column] { get; }
+
         /// <summary>
         /// Places all pieces in their starting positions.
         /// <para>
