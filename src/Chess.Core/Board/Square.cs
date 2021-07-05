@@ -1,3 +1,4 @@
+using System;
 using Chess.Core.Pieces;
 using Chess.Core.Exceptions;
 
@@ -51,6 +52,8 @@ namespace Chess.Core.Board
         /// <exception cref="SquareAlreadyOccupiedException"/>
         public void Place(ChessPiece piece)
         {
+            _ = piece ?? throw new ArgumentNullException(nameof(piece), "Cannot place a piece that is null");
+
             if (!IsFree)
             {
                 throw new SquareAlreadyOccupiedException
