@@ -1,27 +1,19 @@
 using System;
+using Chess.Core.Exceptions;
 
 namespace Chess.Core.Board
 {
     public class ChessBoard : IChessBoard
     {
+        private readonly Square[][] squares;
+
         /// <summary>
         /// Gets the length of the board.
         /// </summary>
         public const int Length = 8;
 
-        public Square[,] Squares { get; init; }
-
-        /// <summary>
-        /// Gets a square of the board by specifing its row and column.
-        /// </summary>
         public Square this[int row, int column] => GetSquare(row, column);
 
-        /// <summary>
-        /// Gets a square of the board by specifing its name.
-        /// <para>
-        /// E.g: "a2", "h7".
-        /// </para>
-        /// </summary>
         public Square this[string name] => GetSquare(name);
 
         /// <summary>
@@ -29,7 +21,7 @@ namespace Chess.Core.Board
         /// </summary>
         public ChessBoard()
         {
-            Squares = new Square[Length, Length];
+            squares = new Square[Length][];
         }
 
         public void Setup()
@@ -50,6 +42,8 @@ namespace Chess.Core.Board
 
         private Square GetSquare(string name)
         {
+            _ = name ?? throw new ArgumentNullException(nameof(name), "aa");
+
             var position = new ChessPosition(name[0], (int)char.GetNumericValue(name[1]));
 
             return GetSquare(position.GetRow(), position.GetColumn());
@@ -59,12 +53,12 @@ namespace Chess.Core.Board
         {
             try
             {
-                return Squares[row, column];
+                return squares[row][column];
             }
             catch (IndexOutOfRangeException e)
             {
-                throw new IndexOutOfRangeException
-                    ("The specified square does not exist.", e);
+                throw new PositionOutOfTheBoardException
+                    ("The specified square does not exist on the board.", e);
             }
         }
         
@@ -72,11 +66,13 @@ namespace Chess.Core.Board
         {
             for (int row = 0; row < Length; row++)
             {
+                squares[row] = new Square[Length];
+
                 for (int column = 0; column < Length; column++)
                 {
                     var name = new ChessPosition((char)(column + 'a'), row + 1);
 
-                    Squares[row, column] = new Square(name);
+                    squares[row][column] = new Square(name);
                 }
             }
         }
