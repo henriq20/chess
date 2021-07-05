@@ -1,5 +1,4 @@
 using System;
-using Chess.Core.Exceptions;
 
 namespace Chess.Core.Board
 {
@@ -55,10 +54,9 @@ namespace Chess.Core.Board
             {
                 return squares[row][column];
             }
-            catch (IndexOutOfRangeException e)
+            catch (IndexOutOfRangeException)
             {
-                throw new PositionOutOfTheBoardException
-                    ("The specified square does not exist on the board.", e);
+                return null;
             }
         }
         
