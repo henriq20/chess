@@ -5,4 +5,17 @@ namespace Chess.Core
         White,
         Black
     }
+
+    public enum ChessMoveType
+    {
+        None,
+        QuietMove,
+        Capture,
+        Promotion,
+        EnPassant,
+        KingsideCastling,
+        QueensideCastling,
+        Check,
+        Checkmate
+    }
 }
