@@ -46,7 +46,7 @@ namespace Chess.Core.Board
 
             var position = new ChessPosition(name[0], (int)char.GetNumericValue(name[1]));
 
-            return GetSquare(position.GetRow(), position.GetColumn());
+            return GetSquare(position.Row, position.Column);
         }
 
         private Square GetSquare(int row, int column)

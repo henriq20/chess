@@ -1,4 +1,5 @@
-﻿using Chess.Core.Exceptions;
+﻿using System;
+using Chess.Core.Exceptions;
 
 namespace Chess.Core
 {
@@ -18,6 +19,16 @@ namespace Chess.Core
         /// </summary>
         /// <value>An <see langword="int"/> value; usually between 1 to 8.</value>
         public int Rank { get; init; }
+
+        /// <summary>
+        /// Subtracts 1 from <see cref="Rank"/> to get a number that represents the row in an array.
+        /// </summary>
+        public int Row => Rank - 1;
+
+        /// <summary>
+        /// Converts the value of <see cref="File"/> into a numberthat represents the column in an array.
+        /// </summary>
+        public int Column => File - 'a';
         
         /// <summary>
         /// Initializes a new instance of the <see cref="ChessPosition"/>class.
@@ -37,6 +48,8 @@ namespace Chess.Core
         /// <exception cref="InvalidChessPositionException"/>
         public ChessPosition(string position)
         {
+            _ = position ?? throw new ArgumentNullException(nameof(position), "Cannot pass null to position.");
+
             if (!IsValidPosition(position))
             {
                 throw new InvalidChessPositionException("The position entered was not a valid chess position.");
@@ -45,26 +58,8 @@ namespace Chess.Core
             File = position[0];
             Rank = (int)char.GetNumericValue(position[1]);
         }
-        
-        /// <summary>
-        /// Subtracts 1 from <see cref="Rank"/> to get a number that represents the row in a multidimensional array.
-        /// </summary>
-        /// <returns>The value of <see cref="Rank"/> minus 1.</returns>
-        public int GetRow()
-        {
-            return Rank - 1;
-        }
-        
-        /// <summary>
-        /// Converts the value of <see cref="File"/> into a numberthat represents the column in a multidimensional array.
-        /// </summary>
-        /// <returns>The value of <see cref="File"/> minus 'a'.</returns>
-        public int GetColumn()
-        {
-            return File - 'a';
-        }
 
-        private bool IsValidPosition(string position)
+        private static bool IsValidPosition(string position)
         {
             return position.Length == 2 && char.IsLetter(position[0]) && char.IsNumber(position[1]);
         }
