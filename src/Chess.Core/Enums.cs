@@ -8,7 +8,6 @@ namespace Chess.Core
 
     public enum ChessMoveType
     {
-        None,
         QuietMove,
         Capture,
         Promotion,
