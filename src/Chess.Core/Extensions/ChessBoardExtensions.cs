@@ -4,14 +4,10 @@ using Chess.Core.Pieces;
 
 namespace Chess.Core.Extensions
 {
-    /// <summary>
-    /// Provides methods for placing the pieces in their starting positions.
-    /// </summary>
+    /// <summary>Provides methods for placing the pieces in their starting positions.</summary>
     public static class ChessBoardExtensions
     {
-        /// <summary>
-        /// Places 8 pawns on each side of the board.
-        /// </summary>
+        /// <summary>Places 8 pawns on each side of the board.</summary>
         /// <param name="board">The board to place the pawns.</param>
         public static void PlacePawns(this IChessBoard board)
         {

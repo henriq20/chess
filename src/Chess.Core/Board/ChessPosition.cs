@@ -3,36 +3,24 @@ using Chess.Core.Exceptions;
 
 namespace Chess.Core
 {
-    /// <summary>
-    /// Stores a value that indicates a coordinate of a chessboard where rows are called Rank and columns File.
-    /// </summary>
+    /// <summary>Stores a value that indicates a coordinate of a chessboard where rows are called Rank and columns File.</summary>
     public class ChessPosition
     {
-        /// <summary>
-        /// Gets a letter that indicates the columns of a chessboard.
-        /// </summary>
+        /// <summary>Gets a letter that indicates the columns of a chessboard.</summary>
         /// <value>A <see langword="char"/> value; usually between 'a' to 'h'.</value>
         public char File { get; init; }
 
-        /// <summary>
-        /// Gets a number that indicates the rows of a chessboard.
-        /// </summary>
+        /// <summary>Gets a number that indicates the rows of a chessboard.</summary>
         /// <value>An <see langword="int"/> value; usually between 1 to 8.</value>
         public int Rank { get; init; }
 
-        /// <summary>
-        /// Subtracts 1 from <see cref="Rank"/> to get a number that represents the row in an array.
-        /// </summary>
+        /// <summary>Subtracts 1 from <see cref="Rank"/> to get a number that represents the row in an array.</summary>
         public int Row => Rank - 1;
 
-        /// <summary>
-        /// Converts the value of <see cref="File"/> into a numberthat represents the column in an array.
-        /// </summary>
+        /// <summary>Converts the value of <see cref="File"/> into a numberthat represents the column in an array.</summary>
         public int Column => File - 'a';
         
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ChessPosition"/>class.
-        /// </summary>
+        /// <summary>Initializes a new instance of the <see cref="ChessPosition"/>class.</summary>
         /// <param name="file">A letter between 'a' to 'h'.</param>
         /// <param name="rank">A number between 1 to 8.</param>
         public ChessPosition(char file, int rank)
@@ -41,9 +29,7 @@ namespace Chess.Core
             Rank = rank;
         }
         
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ChessPosition"/>class.
-        /// </summary>
+        /// <summary>Initializes a new instance of the <see cref="ChessPosition"/>class.</summary>
         /// <param name="position">A letter between 'a' to 'h' and a number between 1 to 8.</param>
         /// <exception cref="InvalidChessPositionException"/>
         public ChessPosition(string position)

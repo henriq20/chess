@@ -2,9 +2,7 @@ namespace Chess.Core.Board
 {
     public interface IChessBoard
     {
-        /// <summary>
-        /// Gets the length of the board.
-        /// </summary>
+        /// <summary>Gets the length of the board.</summary>
         int Length { get; }
         
         /// <summary>
@@ -15,9 +13,7 @@ namespace Chess.Core.Board
         /// </summary>
         Square this[string name] { get; }
 
-        /// <summary>
-        /// Gets a square of the board by specifing its row and column.
-        /// </summary>
+        /// <summary>Gets a square of the board by specifing its row and column.</summary>
         Square this[int row, int column] { get; }
 
         /// <summary>
@@ -28,9 +24,7 @@ namespace Chess.Core.Board
         /// </summary>
         void Setup();
 
-        /// <summary>
-        /// Clears the board by removing the piece from each square.
-        /// </summary>
+        /// <summary>Clears the board by removing the piece from each square.</summary>
         void Clear();
     }
 }
