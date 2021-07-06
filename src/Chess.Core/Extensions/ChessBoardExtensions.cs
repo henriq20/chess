@@ -15,11 +15,8 @@ namespace Chess.Core.Extensions
 
             for (int column = 0; column < board.Length; column++)
             {
-                var whitePawnPosition = new ChessPosition((char)(column + 'a'), 2);
-                var blackPawnPosition = new ChessPosition((char)(column + 'a'), 7);
-
-                var whitePawn = new Pawn(PieceColor.White, whitePawnPosition, board);
-                var blackPawn = new Pawn(PieceColor.Black, blackPawnPosition, board);
+                var whitePawn = new Pawn(PieceColor.White, board);
+                var blackPawn = new Pawn(PieceColor.Black, board);
 
                 board[1, column].Place(whitePawn);
                 board[6, column].Place(blackPawn);
