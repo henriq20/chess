@@ -1,4 +1,5 @@
 using System;
+using Chess.Core.Extensions;
 
 namespace Chess.Core.Board
 {
@@ -25,6 +26,8 @@ namespace Chess.Core.Board
         public void Setup()
         {
             CreateSquares();
+
+            this.PlacePawns();
         }
 
         public void Clear()
