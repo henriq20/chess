@@ -3,6 +3,11 @@ namespace Chess.Core.Board
     public interface IChessBoard
     {
         /// <summary>
+        /// Gets the length of the board.
+        /// </summary>
+        int Length { get; }
+        
+        /// <summary>
         /// Gets a square of the board by specifing its name.
         /// <para>
         /// E.g: "a2", "h7".

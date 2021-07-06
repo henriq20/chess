@@ -6,20 +6,19 @@ namespace Chess.Core.Board
     {
         private readonly Square[][] squares;
 
-        /// <summary>
-        /// Gets the length of the board.
-        /// </summary>
-        public const int Length = 8;
-
+        public int Length { get; init; }
+        
         public Square this[int row, int column] => GetSquare(row, column);
 
         public Square this[string name] => GetSquare(name);
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChessPosition"/>class.
+        /// Initializes a new instance of the <see cref="ChessBoard"/>class
+        /// and a jagged array with 64 squares.
         /// </summary>
         public ChessBoard()
         {
+            Length = 8;
             squares = new Square[Length][];
         }
 
