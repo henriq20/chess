@@ -21,12 +21,12 @@ namespace Chess.Core.Board
         {
             Length = 8;
             squares = new Square[Length][];
+
+            CreateSquares();
         }
 
         public void Setup()
         {
-            CreateSquares();
-
             this.PlacePawns();
         }
 
