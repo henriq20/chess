@@ -34,11 +34,11 @@ namespace Chess.Core.Pieces
 
                 if (oneSquareAhead != null && oneSquareAhead.IsFree)
                 {
-                    legalMoves.Add(new ChessMove(Board[row, column], oneSquareAhead, ChessMoveType.QuietMove));
+                    legalMoves.Add(new ChessMove(Board[row, column], oneSquareAhead, ChessMoveType.Quiet));
 
                     if (Moves == 0 && twoSquaresAhead != null && twoSquaresAhead.IsFree)
                     {
-                        legalMoves.Add(new ChessMove(Board[row, column], twoSquaresAhead, ChessMoveType.QuietMove));
+                        legalMoves.Add(new ChessMove(Board[row, column], twoSquaresAhead, ChessMoveType.Quiet));
                     }
                 }
                 if (diagonalLeft != null && !diagonalLeft.IsFree && diagonalLeft.Piece.Color != Color)
@@ -61,11 +61,11 @@ namespace Chess.Core.Pieces
 
                 if (oneSquareAhead != null && oneSquareAhead.IsFree)
                 {
-                    legalMoves.Add(new ChessMove(Board[row, column], oneSquareAhead, ChessMoveType.QuietMove));
+                    legalMoves.Add(new ChessMove(Board[row, column], oneSquareAhead, ChessMoveType.Quiet));
 
                     if (Moves == 0 && twoSquaresAhead != null && twoSquaresAhead.IsFree)
                     {
-                        legalMoves.Add(new ChessMove(Board[row, column], twoSquaresAhead, ChessMoveType.QuietMove));
+                        legalMoves.Add(new ChessMove(Board[row, column], twoSquaresAhead, ChessMoveType.Quiet));
                     }
                 }
                 if (diagonalLeft != null && !diagonalLeft.IsFree && diagonalLeft.Piece.Color != Color)
