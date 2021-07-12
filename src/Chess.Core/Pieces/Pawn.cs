@@ -1,6 +1,7 @@
 using Chess.Core.Board;
 using Chess.Core.Moves;
-using System.Collections.ObjectModel;
+using Chess.Core.Extensions;
+using System.Collections.Generic;
 
 namespace Chess.Core.Pieces
 {
@@ -18,67 +19,32 @@ namespace Chess.Core.Pieces
 
         }
 
-        public override Collection<ChessMove> GetLegalMoves()
+        public override IEnumerable<ChessMove> GetLegalMoves()
         {
-            var legalMoves = new Collection<ChessMove>();
-
-            int row = Position.Row;
-            int column = Position.Column;
+            List<ChessMovementRule> rules;
 
             if (Color == PieceColor.White)
             {
-                Square oneSquareAhead = Board[row + 1, column];
-                Square twoSquaresAhead = Board[row + 2, column];
-                Square diagonalLeft = Board[row + 1, column - 1];
-                Square diagonalRight = Board[row + 1, column + 1];
-
-                if (oneSquareAhead != null && oneSquareAhead.IsFree)
+                rules = new List<ChessMovementRule>()
                 {
-                    legalMoves.Add(new ChessMove(Board[row, column], oneSquareAhead, ChessMoveType.Quiet));
+                    new ChessMovementRule(this).SquareAt(1,  0).Must(r => r.BeFree()), // One square ahead
+                    new ChessMovementRule(this).SquareAt(2,  0).Must(r => r.BeFree() && !r.HaveMoved() && r.Neighbour(1, 0).IsFree), // Two squares ahead
+                    new ChessMovementRule(this).SquareAt(1, -1).Must(r => r.BeOpponent()), // One square ahead on the left
+                    new ChessMovementRule(this).SquareAt(1,  1).Must(r => r.BeOpponent()), // One square ahead on the right
+                };
 
-                    if (Moves == 0 && twoSquaresAhead != null && twoSquaresAhead.IsFree)
-                    {
-                        legalMoves.Add(new ChessMove(Board[row, column], twoSquaresAhead, ChessMoveType.Quiet));
-                    }
-                }
-                if (diagonalLeft != null && !diagonalLeft.IsFree && diagonalLeft.Piece.Color != Color)
-                {
-                    legalMoves.Add(new ChessMove(Board[row, column], diagonalLeft, ChessMoveType.Capture));
-                }
-                if (diagonalRight != null && !diagonalRight.IsFree && diagonalRight.Piece.Color != Color)
-                {
-                    legalMoves.Add(new ChessMove(Board[row, column], diagonalRight, ChessMoveType.Capture));
-                }
-
-                return legalMoves;
+                return rules.GetLegalMoves();
             }
-            else
+
+            rules = new List<ChessMovementRule>()
             {
-                Square oneSquareAhead = Board[row - 1, column];
-                Square twoSquaresAhead = Board[row - 2, column];
-                Square diagonalLeft = Board[row - 1, column + 1];
-                Square diagonalRight = Board[row - 1, column - 1];
+                new ChessMovementRule(this).SquareAt(-1,  0).Must(r => r.BeFree()), // One square ahead
+                new ChessMovementRule(this).SquareAt(-2,  0).Must(r => r.BeFree() && !r.HaveMoved() && r.Neighbour(-1, 0).IsFree), // Two squares ahead
+                new ChessMovementRule(this).SquareAt(-1, -1).Must(r => r.BeOpponent()), // One square ahead on the left
+                new ChessMovementRule(this).SquareAt(-1,  1).Must(r => r.BeOpponent()) // One square ahead on the right
+            };
 
-                if (oneSquareAhead != null && oneSquareAhead.IsFree)
-                {
-                    legalMoves.Add(new ChessMove(Board[row, column], oneSquareAhead, ChessMoveType.Quiet));
-
-                    if (Moves == 0 && twoSquaresAhead != null && twoSquaresAhead.IsFree)
-                    {
-                        legalMoves.Add(new ChessMove(Board[row, column], twoSquaresAhead, ChessMoveType.Quiet));
-                    }
-                }
-                if (diagonalLeft != null && !diagonalLeft.IsFree && diagonalLeft.Piece.Color != Color)
-                {
-                    legalMoves.Add(new ChessMove(Board[row, column], diagonalLeft, ChessMoveType.Capture));
-                }
-                if (diagonalRight != null && !diagonalRight.IsFree && diagonalRight.Piece.Color != Color)
-                {
-                    legalMoves.Add(new ChessMove(Board[row, column], diagonalRight, ChessMoveType.Capture));
-                }
-
-                return legalMoves;
-            }
+            return rules.GetLegalMoves();
         }
 
         public override string ToString()

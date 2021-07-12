@@ -1,5 +1,5 @@
 using Chess.Core.Moves;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace Chess.Core.Pieces
 {
@@ -7,7 +7,7 @@ namespace Chess.Core.Pieces
     {
         /// <summary>Gets all the moves that a piece can move to on the board.</summary>
         /// <returns>A collection with all the legal moves.</returns>
-        Collection<ChessMove> GetLegalMoves();
+        IEnumerable<ChessMove> GetLegalMoves();
 
         /// <summary>Indicates whether a specific move is legal.</summary>
         /// <param name="move">The move to be evaluated.</param>

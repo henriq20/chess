@@ -1,6 +1,7 @@
+using System.Linq;
 using Chess.Core.Board;
 using Chess.Core.Moves;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace Chess.Core.Pieces
 {
@@ -55,6 +56,6 @@ namespace Chess.Core.Pieces
             return GetLegalMoves()?.Contains(move) ?? false;
         }
         
-        public abstract Collection<ChessMove> GetLegalMoves();
+        public abstract IEnumerable<ChessMove> GetLegalMoves();
     }
 }
