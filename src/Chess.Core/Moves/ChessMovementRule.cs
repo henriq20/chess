@@ -3,7 +3,7 @@ using Chess.Core.Board;
 using Chess.Core.Pieces;
 using System.Collections.ObjectModel;
 
-namespace Chess.Core
+namespace Chess.Core.Moves
 {
     /// <summary>Provides conditions for a chess move to be performed.</summary>
     public class ChessMovementRule
