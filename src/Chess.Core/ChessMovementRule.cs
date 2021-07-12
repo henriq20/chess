@@ -45,14 +45,14 @@ namespace Chess.Core
         /// <returns><see langword="true"/> if it is an opponent; otherwise, <see langword="false"/>.</returns>
         public bool BeOpponent()
         {
-            return !Target.IsFree && Target.Piece.Color != Piece.Color;
+            return Target != null && !Target.IsFree && Target.Piece.Color != Piece.Color;
         }
 
         /// <summary>Indicates a condition where the <see cref="Target"/> must be free.</summary>
         /// <returns><see langword="true"/> if it is free; otherwise, <see langword="false"/>.</returns>
         public bool BeFree()
         {
-            return Target.IsFree;
+            return Target != null && Target.IsFree;
         }
 
         /// <summary>Indicates a condition where the piece on the <see cref="Target"/> have already moved.</summary>
