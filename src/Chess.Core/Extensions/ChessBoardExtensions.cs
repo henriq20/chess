@@ -22,5 +22,18 @@ namespace Chess.Core.Extensions
                 board[6, column].Place(blackPawn);
             }
         }
+
+        /// <summary>Places 1 king on each side of the board.</summary>
+        /// <param name="board">The board to place the kings.</param>
+        public static void PlaceKings(this IChessBoard board)
+        {
+            _ = board ?? throw new ArgumentNullException(nameof(board), "Cannot pass null to board.");
+
+            var whiteKing = new King(PieceColor.White, board);
+            var blackKing = new King(PieceColor.Black, board);
+
+            board["e1"].Place(whiteKing);
+            board["e8"].Place(blackKing);
+        }
     }
 }

@@ -28,6 +28,7 @@ namespace Chess.Core.Board
         public void Setup()
         {
             this.PlacePawns();
+            this.PlaceKings();
         }
 
         public void Clear()
