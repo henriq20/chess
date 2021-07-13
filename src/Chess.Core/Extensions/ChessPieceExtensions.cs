@@ -1,11 +1,17 @@
 using System.Linq;
 using Chess.Core.Moves;
 using System.Collections.Generic;
+using Chess.Core.Pieces;
 
 namespace Chess.Core.Extensions
 {
     public static class ChessPieceExtensions
     {
+        public static ChessMovementRule RuleForSquareAt(this ChessPiece piece, int row, int column)
+        {
+            return new ChessMovementRule(piece).SquareAt(row, column);
+        }
+
         /// <summary>
         /// Selects all rules that its condition is satisfied.
         /// </summary>
@@ -19,7 +25,7 @@ namespace Chess.Core.Extensions
 
         private static bool AllConditionsSatisfied(ChessMovementRule rule)
         {
-            return rule.Conditions.All(c => c(rule) == true);
+            return rule.Conditions.All(c => c(new ChessMovementRuleOptions(rule)) == true);
         }
     }
 }

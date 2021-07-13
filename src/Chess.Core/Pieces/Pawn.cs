@@ -27,10 +27,10 @@ namespace Chess.Core.Pieces
             {
                 rules = new List<ChessMovementRule>()
                 {
-                    new ChessMovementRule(this).SquareAt(1,  0).Must(r => r.BeFree()), // One square ahead
-                    new ChessMovementRule(this).SquareAt(2,  0).Must(r => r.BeFree() && !r.HaveMoved() && r.Neighbour(1, 0).IsFree), // Two squares ahead
-                    new ChessMovementRule(this).SquareAt(1, -1).Must(r => r.BeOpponent()), // One square ahead on the left
-                    new ChessMovementRule(this).SquareAt(1,  1).Must(r => r.BeOpponent()), // One square ahead on the right
+                    this.RuleForSquareAt(1,  0).Must(o => o.BeFree()), // One square ahead
+                    this.RuleForSquareAt(2,  0).Must(o => o.BeDoublePush()), // Two squares ahead
+                    this.RuleForSquareAt(1, -1).Must(o => o.BeOpponent()), // One square ahead on the left
+                    this.RuleForSquareAt(1,  1).Must(o => o.BeOpponent()), // One square ahead on the right
                 };
 
                 return rules.GetLegalMoves();
@@ -38,10 +38,10 @@ namespace Chess.Core.Pieces
 
             rules = new List<ChessMovementRule>()
             {
-                new ChessMovementRule(this).SquareAt(-1,  0).Must(r => r.BeFree()), // One square ahead
-                new ChessMovementRule(this).SquareAt(-2,  0).Must(r => r.BeFree() && !r.HaveMoved() && r.Neighbour(-1, 0).IsFree), // Two squares ahead
-                new ChessMovementRule(this).SquareAt(-1, -1).Must(r => r.BeOpponent()), // One square ahead on the left
-                new ChessMovementRule(this).SquareAt(-1,  1).Must(r => r.BeOpponent()) // One square ahead on the right
+                this.RuleForSquareAt(-1,  0).Must(o => o.BeFree()), // One square ahead
+                this.RuleForSquareAt(-2,  0).Must(o => o.BeDoublePush()), // Two squares ahead
+                this.RuleForSquareAt(-1, -1).Must(o => o.BeOpponent()), // One square ahead on the left
+                this.RuleForSquareAt(-1,  1).Must(o => o.BeOpponent()) // One square ahead on the right
             };
 
             return rules.GetLegalMoves();

@@ -23,22 +23,22 @@ namespace Chess.Core.Pieces
         {
             var rules = new List<ChessMovementRule>()
             {
-                new ChessMovementRule(this).SquareAt( 1,  0).Must(BeFreeOrOpponent), // One square ahead
-                new ChessMovementRule(this).SquareAt( 1, -1).Must(BeFreeOrOpponent), // One square ahead on the left
-                new ChessMovementRule(this).SquareAt( 1,  1).Must(BeFreeOrOpponent), // One square ahead on the right
-                new ChessMovementRule(this).SquareAt( 0, -1).Must(BeFreeOrOpponent), // One square on the left
-                new ChessMovementRule(this).SquareAt( 0,  1).Must(BeFreeOrOpponent), // One square on the right
-                new ChessMovementRule(this).SquareAt(-1,  0).Must(BeFreeOrOpponent), // One square back
-                new ChessMovementRule(this).SquareAt(-1, -1).Must(BeFreeOrOpponent), // One square back on the left
-                new ChessMovementRule(this).SquareAt(-1,  1).Must(BeFreeOrOpponent), // One square back on the right
+                this.RuleForSquareAt( 1,  0).Must(BeFreeOrOpponent), // One square ahead
+                this.RuleForSquareAt( 1, -1).Must(BeFreeOrOpponent), // One square ahead on the left
+                this.RuleForSquareAt( 1,  1).Must(BeFreeOrOpponent), // One square ahead on the right
+                this.RuleForSquareAt( 0, -1).Must(BeFreeOrOpponent), // One square on the left
+                this.RuleForSquareAt( 0,  1).Must(BeFreeOrOpponent), // One square on the right
+                this.RuleForSquareAt(-1,  0).Must(BeFreeOrOpponent), // One square back
+                this.RuleForSquareAt(-1, -1).Must(BeFreeOrOpponent), // One square back on the left
+                this.RuleForSquareAt(-1,  1).Must(BeFreeOrOpponent), // One square back on the right
             };
 
             return rules.GetLegalMoves();
         }
 
-        private static bool BeFreeOrOpponent(ChessMovementRule rule)
+        private static bool BeFreeOrOpponent(ChessMovementRuleOptions options)
         {
-            return rule.BeFree() || rule.BeOpponent();
+            return options.BeFree() || options.BeOpponent();
         }
 
         public override string ToString()
