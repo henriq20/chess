@@ -2,6 +2,7 @@ using System;
 using Chess.Core.Board;
 using Chess.Core.Pieces;
 using System.Collections.ObjectModel;
+using System.Drawing;
 
 namespace Chess.Core.Moves
 {
@@ -68,8 +69,8 @@ namespace Chess.Core.Moves
         /// <returns>The square if found; otherwise, <see langword="null"/>.</returns>
         public Square Neighbour(int row, int column)
         {
-            return Piece.Board[Math.Abs(row + Piece.Position.Row),
-                               Math.Abs(column + Piece.Position.Column)];
+            return Piece.Board[row + Piece.Position.Row,
+                               column + Piece.Position.Column];
         }
     }
 }
