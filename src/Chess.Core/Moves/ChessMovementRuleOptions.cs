@@ -28,9 +28,18 @@ namespace Chess.Core.Moves
 
         /// <summary>Indicates a condition where the Piece is a Pawn and can move two squares ahead.</summary>
         /// <returns><see langword="true"/> if it can move; otherwise, <see langword="false"/>.</returns>
+        public bool BePush()
+        {
+            return Rule.Piece is Pawn && Rule.Target.IsFree && Rule.Target.Name.Rank < 8 && Rule.Target.Name.Rank > 1;
+        }
+
+        /// <summary>Indicates a condition where the Piece is a Pawn and can move two squares ahead.</summary>
+        /// <returns><see langword="true"/> if it can move; otherwise, <see langword="false"/>.</returns>
         public bool BeDoublePush()
         {
-            return Rule.Piece is Pawn && TargetNotNull() && !HaveMoved() && BeFree() && Neighbour(1, 0).IsFree;
+            Square neighbour = Rule.Piece.Color == PieceColor.White ? Neighbour(1, 0) : Neighbour(-1, 0);
+
+            return Rule.Piece is Pawn && TargetNotNull() && !HaveMoved() && BeFree() && neighbour.IsFree;
         }
 
         /// <summary>Indicates a condition where the piece on the <see cref="Target"/> have already moved.</summary>
@@ -38,6 +47,25 @@ namespace Chess.Core.Moves
         public bool HaveMoved()
         {
             return Rule.Piece.Moves > 0;
+        }
+
+        /// <summary>Indicates a condition where a pawn reaches the last rank and can be promoted to another piece.</summary>
+        /// <returns><see langword="true"/> if it can promote; otherwise, <see langword="false"/>.</returns>
+        public bool BePromotion()
+        {
+            if (Rule.Origin.Piece is Pawn && Rule.Origin.Piece.Color == PieceColor.White)
+            {
+                return Rule.Target.Name.Rank == 8 && Rule.Target.IsFree
+                       && Rule.Target.Name.File == Rule.Origin.Piece.Position.File;
+            }
+
+            if (Rule.Origin.Piece is Pawn && Rule.Origin.Piece.Color == PieceColor.Black)
+            {
+                return Rule.Target.Name.Rank == 1 && Rule.Target.IsFree
+                       && Rule.Target.Name.File == Rule.Origin.Piece.Position.File;
+            }
+
+            return false;
         }
 
         /// <summary>Gets a square based on the position of the <see cref="Piece"/>.</summary>
