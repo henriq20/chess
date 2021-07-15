@@ -20,7 +20,7 @@ namespace Chess.Core.Extensions
         public static IEnumerable<ChessMove> GetLegalMoves(this IEnumerable<ChessMovementRule> rules)
         {
             return rules.Where(AllConditionsSatisfied)
-                        .Select(r => new ChessMove(r.Origin, r.Target));
+                        .Select(r => new ChessMove(r.Origin, r.Target, r.MoveType));
         }
 
         private static bool AllConditionsSatisfied(ChessMovementRule rule)
