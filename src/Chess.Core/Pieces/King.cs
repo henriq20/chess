@@ -23,14 +23,23 @@ namespace Chess.Core.Pieces
         {
             var rules = new List<ChessMovementRule>()
             {
-                this.RuleForSquareAt( 1,  0).Must(BeFreeOrOpponent), // One square ahead
-                this.RuleForSquareAt( 1, -1).Must(BeFreeOrOpponent), // One square ahead on the left
-                this.RuleForSquareAt( 1,  1).Must(BeFreeOrOpponent), // One square ahead on the right
-                this.RuleForSquareAt( 0, -1).Must(BeFreeOrOpponent), // One square on the left
-                this.RuleForSquareAt( 0,  1).Must(BeFreeOrOpponent), // One square on the right
-                this.RuleForSquareAt(-1,  0).Must(BeFreeOrOpponent), // One square back
-                this.RuleForSquareAt(-1, -1).Must(BeFreeOrOpponent), // One square back on the left
-                this.RuleForSquareAt(-1,  1).Must(BeFreeOrOpponent), // One square back on the right
+                this.RuleForSquareAt( 1,  0).Must(r => r.BeFree()).Is(ChessMoveType.Quiet), // One square ahead
+                this.RuleForSquareAt( 1, -1).Must(r => r.BeFree()).Is(ChessMoveType.Quiet), // One square ahead on the left
+                this.RuleForSquareAt( 1,  1).Must(r => r.BeFree()).Is(ChessMoveType.Quiet), // One square ahead on the right
+                this.RuleForSquareAt( 0, -1).Must(r => r.BeFree()).Is(ChessMoveType.Quiet), // One square on the left
+                this.RuleForSquareAt( 0,  1).Must(r => r.BeFree()).Is(ChessMoveType.Quiet), // One square on the right
+                this.RuleForSquareAt(-1,  0).Must(r => r.BeFree()).Is(ChessMoveType.Quiet), // One square back
+                this.RuleForSquareAt(-1, -1).Must(r => r.BeFree()).Is(ChessMoveType.Quiet), // One square back on the left
+                this.RuleForSquareAt(-1,  1).Must(r => r.BeFree()).Is(ChessMoveType.Quiet), // One square back on the right
+
+                this.RuleForSquareAt( 1,  0).Must(r => r.BeOpponent()).Is(ChessMoveType.Capture), // One square ahead
+                this.RuleForSquareAt( 1, -1).Must(r => r.BeOpponent()).Is(ChessMoveType.Capture), // One square ahead on the left
+                this.RuleForSquareAt( 1,  1).Must(r => r.BeOpponent()).Is(ChessMoveType.Capture), // One square ahead on the right
+                this.RuleForSquareAt( 0, -1).Must(r => r.BeOpponent()).Is(ChessMoveType.Capture), // One square on the left
+                this.RuleForSquareAt( 0,  1).Must(r => r.BeOpponent()).Is(ChessMoveType.Capture), // One square on the right
+                this.RuleForSquareAt(-1,  0).Must(r => r.BeOpponent()).Is(ChessMoveType.Capture), // One square back
+                this.RuleForSquareAt(-1, -1).Must(r => r.BeOpponent()).Is(ChessMoveType.Capture), // One square back on the left
+                this.RuleForSquareAt(-1,  1).Must(r => r.BeOpponent()).Is(ChessMoveType.Capture), // One square back on the right
             };
 
             return rules.GetLegalMoves();

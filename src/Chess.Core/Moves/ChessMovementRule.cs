@@ -11,6 +11,8 @@ namespace Chess.Core.Moves
         public ChessPiece Piece { get; init; }
         public Square Origin { get; private set; }
         public Square Target { get; private set; }
+        public ChessMoveType MoveType { get; private set; }
+        
         public Collection<Func<ChessMovementRuleOptions, bool>> Conditions { get; private set; }
 
         public ChessMovementRule(ChessPiece piece)
@@ -38,6 +40,17 @@ namespace Chess.Core.Moves
         public ChessMovementRule Must(Func<ChessMovementRuleOptions, bool> condition)
         {
             Conditions.Add(condition);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the type of the move.
+        /// </summary>
+        /// <param name="moveType">The type of the move.</param>
+        /// <returns>The same instance, but with the <see cref="MoveType"/> set.</returns>
+        public ChessMovementRule Is(ChessMoveType moveType)
+        {
+            MoveType = moveType;
             return this;
         }
     }
